@@ -13,25 +13,30 @@ autoinstall:
     allow-pw: true
   storage:
     config:
-      - id: disko
-        type: disk
+      - type: disk
+        id: disko
         match:
           size: 320GB
         ptable: gpt
         wipe: superblock-recursive
         preserve: false
         grub_device: true
-        partitions:
-          - size: 512M
-            type: efi
+        config:
+          - type: partition
+            size: 512M
+            flag: boot
+            filesystem: fat32
             mount: /boot/efi
-          - size: 314G
-            type: ext4
+          - type: partition
+            size: 314G
+            filesystem: ext4
             mount: /
-          - size: 4G
-            type: swap
-          - size: -1
-            type: ext4
+          - type: partition
+            size: 4G
+            filesystem: swap
+          - type: partition
+            size: -1
+            filesystem: ext4
             mount: /home
   packages:
     - vim
