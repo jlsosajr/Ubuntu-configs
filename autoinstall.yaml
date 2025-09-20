@@ -1,7 +1,6 @@
 #cloud-config
 autoinstall:
-version: 1
-autoinstall:
+  version: 1
   identity:
     hostname: ubuntu-external
     username: sosarx
@@ -14,7 +13,7 @@ autoinstall:
     allow-pw: true
   storage:
     config:
-      - id: disk0
+      - id: disko
         type: disk
         match:
           size: 320GB
@@ -42,8 +41,5 @@ autoinstall:
     - openssh-server
   late-commands:
     - echo "Ubuntu installed on external drive" > /home/joe/install.log
-    user-data:
-  autologin: true
-  late-commands:
-  - sed -i 's/GRUB_TIMEOUT=10/GRUB_TIMEOUT=2/' /etc/default/grub
-  - update-grub
+    - sed -i 's/GRUB_TIMEOUT=10/GRUB_TIMEOUT=2/' /etc/default/grub
+    - update-grub
